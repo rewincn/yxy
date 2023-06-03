@@ -13,9 +13,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <title>贝肯熊TF</title>
+    <title>逍遥子TF</title>
     
-    <link href="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/limonte-sweetalert2/11.4.4/sweetalert2.min.css" type="text/css" rel="stylesheet" />
+    <link href="/static/sweetalert2.min.css" type="text/css" rel="stylesheet" />
     <style>
         #app{
             max-width: 600px;
@@ -155,18 +155,20 @@ function inputCode_b(url) {
     </div>
     <div class="install">
         <button class="button content-bg" @click="installTf" :style="{backgroundColor:bg}">步骤① →【安装TestFlight】</button>
-        <button class="button content-bg" @click="inputCode(to1)" :style="{backgroundColor:bg}">步骤② →【TF安装 贝肯熊】</button>
-        <button class="button content-bg" @click="qiye" :style="{backgroundColor:bg}">【安装→贝肯熊企业版】</button>
+        <button class="button content-bg" @click="inputCode(to1)" :style="{backgroundColor:bg}">步骤② →【TF安装 逍遥子】</button>
         <button class="button content-bg" @click="checkcode" :style="{backgroundColor:bg}">激活码查询</button>
+        <button class="button content-bg" @click="anzhuang" :style="{backgroundColor:bg}">安装教程-点击观看</button>
+        <button class="button content-bg" @click="gongneng" :style="{backgroundColor:bg}">功能使用-点击观看</button>
+
+    </div>
 
     </div>
     </n-spin> 
     </n-config-provider>  
     <img class="img-view header-img" :src="bottomImg" alt="" srcset="">
     
-    <script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue/3.2.31/vue.global.min.js" type="application/javascript"></script>
-    <!--<script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/limonte-sweetalert2/11.4.4/sweetalert2.min.js" type="application/javascript"></script>-->
-    <script src="https://unpkg.com/naive-ui"></script>
+    <script src="/static/vue.global.min.js" type="application/javascript"></script>
+    <script src="static/js/index11.js"></script>
     <script>
         //
         const { createApp } = Vue
@@ -174,7 +176,7 @@ function inputCode_b(url) {
         const app = createApp({
             data() {
                 return {
-                    appName:"贝肯熊",
+                    appName:"逍遥子",
                     headerImg:headerImg,
                     bottomImg:bottomImg,
                     bg:backgroundColor,
@@ -184,11 +186,14 @@ function inputCode_b(url) {
                 }
             },
             methods:{
-                qiye(){
-                    window.open("https://www.lanzouy.com/s/bkx")
-                },
                 checkcode(){
-                    window.open("http://code.bkx.ipa8.cn/")
+                    window.open("http://code.xyz.ipa6.top/")
+                },
+                anzhuang(){
+                    window.open("https://ff.rewincn.cn:8009/az.mp4")
+                },
+                gongneng(){
+                    window.open("https://ff.rewincn.cn:8009/gn.mp4")
                 },
                 installTf(){
                     window.open("https://apps.apple.com/cn/app/testflight/id899247664")
