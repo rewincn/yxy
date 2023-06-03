@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <link rel="stylesheet" href="./assets/mui.min.css">
+    
+    
+    <script src="./assets/jquery-1.11.1.min.js"></script>
+    <script src="./assets/mui.min.js"></script>
+    <script src="./assets/util.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>贝肯熊TF</title>
+    
+    <link href="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/limonte-sweetalert2/11.4.4/sweetalert2.min.css" type="text/css" rel="stylesheet" />
+    <style>
+        #app{
+            max-width: 600px;
+            margin:  0 auto;
+        }
+        .img-view{
+            border-radius: 10px;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .des{
+            border-radius: 5px;
+            padding: 10px 15px;
+            margin-top: 5px;
+        }
+        .des ul{
+            color:#f9f6f6;font-weight: bold;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            line-height: 30px;
+        }
+        .install{
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+        .button{
+            padding: 10px;
+            margin-top: 15px;
+            border: none;
+            width: 100%;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #f9f6f6 !important;
+        }
+        li,ul {
+            list-style-type:none;
+        }
+        .des li:before {
+            content: "🔸";
+            margin-right:10px;
+        }
+        .red{
+            color:red;
+        }
+    </style>
+    <script>
+        let headerImg = "./top1.jpg" // 顶部图片
+        let bottomImg = "./dmx1.jpg" // 底部图片
+        let backgroundColor = "#3d0d9d"
+        let apiUrl = "https://api.loveppp.cc/api/down/redeem/bkx11" 
+        
+        let apiUrl2 = "" // 二开地址api地址 不填写则隐藏
+        
+
+
+    </script>
+</head>
+<body>
+<script>
+var btnArray = ['OK'];
+mui.confirm("<br>"+'贝肯熊TF版，如果出现无连接请过15分钟再下载，保证链接充足。 '+"<br><br>", "<br>"+'开放下载中', btnArray, function(e) {
+})
+
+function inputCode_b(url) {
+
+    var btnArray = ['取消', '确认'];
+    mui.prompt('兑换成功后请立即下载安装！', '', '请输入兑换码', btnArray, function(e) {
+        if (e.index == 1) {
+            if (e.value == '') {
+                util.toast('请输入兑换码', '', 'error');
+                return false;
+            }
+            app.$data.loading = true
+            fetch(url+"/code/"+e.value+"/v1",{method: 'get' ,headers: {'Content-Type': 'application/json'}}).then(async response => {
+                                    try{
+                                        
+                                        let data = await response.json()
+                                        if (data.code!==1) {
+                                            mui.alert(data.msg, '提示', function() {}); 
+                                            
+                                        }else{
+                                            location.href = 'itms-beta://testflight.apple.com/v1/invite/'+ data.data.url;
+                                        }  
+                                       
+                                    }catch(e){
+                                        mui.alert(data.data.msg, '提示', function() {})
+                                        //Swal.showValidationMessage(e)
+                                        return false
+                                    }
+                                }).catch(error => { mui.alert('页面不存在', '提示', function() {}); }).finally(()=>app.$data.loading = false)
+        //   $.get(url+"/code/"+e.value+"/v1", {code: e.value}, function(data,error){
+        //              alert(data)
+        //              console.log(data,error)
+        //             if (data == '<h1>页面不存在</h1>') {
+        // 				mui.alert('页面不存在', '提示', function() {});                    
+        //             } else {
+        //                 //var data = JSON.parse(data);
+        //                 if (data.code!==1) {
+        //     				mui.alert(data.data.msg, '提示', function() {}); 
+        //                 }else{
+        //                     location.href = 'itms-beta://testflight.apple.com/v1/invite'+ data.data.url;
+        //                 }                       
+        //             } 
+
+        //     },"json"); 
+        } else {
+
+        }
+    })
+}  
+</script>     
+<div id="app">
+    <style type="text/css" media="all">
+        .content-bg{
+        background-color: {{bg}};
+        }
+    </style>
+    <n-config-provider :theme-overrides="{common:{primaryColor:bg}}">
+    <n-spin :show="loading">
+    <img class="img-view header-img" :src="headerImg" alt="" srcset="">
+    <n-alert title="" v-show="loading" type="success">
+        正在获取链接...
+    </n-alert>
+    <div class=" des" :style="{backgroundColor:bg}">
+        <ul >
+            <li>TF高端稳定8.0.32版本 超级防封 畅爽使用 不卡设备</li>
+            <li>请尽快下载 </li>
+            <li>如果显示无连接，请等待20分钟补下载连接</li>
+            <li><span class="red">新用户购买后请立即下载安装</span></li>
+            <li><span class="red">独家离线验证机制，不惧服务器断网</span></li>
+        </ul>
+    </div>
+    <div class="install">
+        <button class="button content-bg" @click="installTf" :style="{backgroundColor:bg}">步骤① →【安装TestFlight】</button>
+        <button class="button content-bg" @click="inputCode(to1)" :style="{backgroundColor:bg}">步骤② →【TF安装 贝肯熊】</button>
+        <button class="button content-bg" @click="qiye" :style="{backgroundColor:bg}">【安装→贝肯熊企业版】</button>
+        <button class="button content-bg" @click="checkcode" :style="{backgroundColor:bg}">激活码查询</button>
+
+    </div>
+    </n-spin> 
+    </n-config-provider>  
+    <img class="img-view header-img" :src="bottomImg" alt="" srcset="">
+    
+    <script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue/3.2.31/vue.global.min.js" type="application/javascript"></script>
+    <!--<script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/limonte-sweetalert2/11.4.4/sweetalert2.min.js" type="application/javascript"></script>-->
+    <script src="https://unpkg.com/naive-ui"></script>
+    <script>
+        //
+        const { createApp } = Vue
+        
+        const app = createApp({
+            data() {
+                return {
+                    appName:"贝肯熊",
+                    headerImg:headerImg,
+                    bottomImg:bottomImg,
+                    bg:backgroundColor,
+                    to1:apiUrl||window.location.pathname,
+                    to2:apiUrl2,
+                    loading:false
+                }
+            },
+            methods:{
+                qiye(){
+                    window.open("https://www.lanzouy.com/s/bkx")
+                },
+                checkcode(){
+                    window.open("http://code.bkx.ipa8.cn/")
+                },
+                installTf(){
+                    window.open("https://apps.apple.com/cn/app/testflight/id899247664")
+                },
+                inputCode(url){
+                    inputCode_b(url);
+                    return;
+                    Swal.fire({
+                        title: '请输入兑换码',
+                        input: 'text',
+                        text:"兑换成功后请3分钟内下载安装！",
+                        inputAttributes: {
+                            autocapitalize: 'off'
+                        },
+                        showCancelButton: true,
+                        confirmButtonText: '确认',
+                        cancelButtonText:'取消',
+                        showLoaderOnConfirm: true,
+                        preConfirm: (code) => {
+                              console.log(code)
+                            return   fetch(url+"/"+code+"/v1",{method: 'post',body:JSON.stringify({code:code}) ,headers: {'Content-Type': 'application/json'}})
+                                .then(async response => {
+
+                                    try{
+                                        let data = await response.json()
+                                        if (data.code!==1) {
+                                            Swal.showValidationMessage(data.msg)
+                                            throw new Error(data.msg)
+                                        }else{
+                                            return  'itms-beta://testflight.apple.com/v1/invite'+ data.data.url
+
+                                        }
+                                    }catch(e){
+                                        Swal.showValidationMessage(e)
+                                        return false
+                                    }
+                                }).catch(error => {
+                                    Swal.showValidationMessage(`无法连接服务器,点确认按钮再试一次即可`)
+                                })
+
+                        },
+                        allowOutsideClick: () => !Swal.isLoading()
+                    }).then((result) => {
+                        if (result.value) {
+                            console.log(result)
+                            Swal.fire({
+                                title: `将跳转至TestFlight`,
+                                text:"如没有跳转请确认是否安装TestFlight",
+                                confirmButtonText: '安装 TestFlight',
+                            }).then((v)=>{
+                                if (v.value){
+                                    window.open("https://apps.apple.com/cn/app/testflight/id899247664")
+                                }
+
+                            })
+                            window.location.href = result.value
+                        }
+                    })
+                }
+            }
+        }).use(naive).mount('#app')
+    </script>
+
+</div>
+</body>
+</html>
